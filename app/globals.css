@@ -3,25 +3,89 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --brand: #2563eb;
+  --brand-2: #06b6d4;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-slate-100 text-slate-800 antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(6, 182, 212, 0.05), transparent);
+  background-attachment: fixed;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 简易 Markdown 展示(实验步骤内容) */
+.md h1 { @apply text-xl font-bold mt-4 mb-2; }
+.md h2 { @apply text-lg font-bold mt-4 mb-2; }
+.md h3 { @apply text-base font-semibold mt-3 mb-1; }
+.md p { @apply my-2 leading-relaxed; }
+.md ul { @apply list-disc pl-6 my-2; }
+.md ol { @apply list-decimal pl-6 my-2; }
+.md code { @apply bg-slate-100 rounded px-1 py-0.5 text-sm font-mono text-pink-600; }
+.md pre { @apply bg-slate-900 text-slate-100 rounded-lg p-3 my-2 overflow-x-auto text-sm; }
+.md pre code { @apply bg-transparent text-slate-100 p-0; }
+.md a { @apply text-blue-600 underline; }
+.md blockquote { @apply border-l-4 border-slate-300 pl-3 text-slate-500 my-2; }
+
+/* 卡片 */
+.card {
+  @apply bg-white rounded-xl border border-slate-200/80;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
 }
+.card:hover {
+  border-color: rgba(59, 130, 246, 0.25);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+}
+
+/* 渐变标题 */
+.tech-title {
+  @apply font-bold bg-clip-text text-transparent;
+  background-image: linear-gradient(120deg, #1e40af 0%, #2563eb 45%, #06b6d4 100%);
+}
+
+/* 按钮 */
+.btn {
+  @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium
+    transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.btn-primary {
+  @apply btn text-white shadow-sm;
+  background-image: linear-gradient(120deg, #2563eb 0%, #0891b2 100%);
+}
+.btn-primary:hover:not(:disabled) {
+  background-image: linear-gradient(120deg, #1d4ed8 0%, #0e7490 100%);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+.btn-secondary { @apply btn bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400; }
+.btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
+.btn-success {
+  @apply btn text-white;
+  background-image: linear-gradient(120deg, #059669 0%, #0d9488 100%);
+}
+.btn-success:hover:not(:disabled) { box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35); }
+
+.input {
+  @apply w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none bg-white
+    focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500 transition-shadow;
+}
+
+.label { @apply block text-sm font-medium text-slate-700 mb-1; }
+
+.badge { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium; }
+.badge-green { @apply badge bg-emerald-100 text-emerald-700; }
+.badge-gray { @apply badge bg-slate-100 text-slate-600; }
+.badge-blue { @apply badge bg-blue-100 text-blue-700; }
+.badge-red { @apply badge bg-red-100 text-red-700; }
+.badge-amber { @apply badge bg-amber-100 text-amber-700; }
+
+/* 管理端横幅 */
+.tech-banner {
+  @apply relative overflow-hidden rounded-xl border border-blue-500/20 mb-6;
+  background-color: #0b1220;
+  background-size: cover;
+  background-position: center;
+}
+
+/* 空状态 */
+.empty-state { @apply card p-10 text-center text-slate-400; }
